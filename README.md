@@ -28,15 +28,15 @@
 | description          | text       | null: false                     |
 | category_id          | integer    | null: false                     |
 | status_id            | integer    | null: false                     |
-| shipping_charges_id  | integer    | null: false                     |
-| shipping_from_id     | integer    | null: false                     |
+| shipping_charge_id   | integer    | null: false                     |
+| prefectures_id       | integer    | null: false                     |
 | days_for_shipping_id | integer    | null: false                     |
 | price                | integer    | null: false                     |
 | user                 | references | null: false, foreign_key: true  |
 
 ### Association
 - belongs_to :user
-- belongs_to :purchase
+- has_one :purchase
 
 
 
@@ -67,4 +67,4 @@
 | purchase       | references | null: false, foreign_key: true  | 
 
 ### Association
-- has_one :purchase
+- belongs_to :purchase
