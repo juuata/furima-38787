@@ -12,7 +12,7 @@ RSpec.describe Item, type: :model do
       end
     end
     context '商品情報が保存できない場合' do
-      it '商品画像がないと保存できない' do
+      it '商品画像がないとツイートは保存できない' do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
@@ -28,27 +28,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
       it 'カテゴリーの情報がないと保存できない' do
-        @item.category_id = '' || '1'
+        @item.category_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it '商品の状態の情報がないと保存できない' do
-        @item.status_id = '' || '1'
+        @item.status_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Status can't be blank")
       end
       it '配送料の負担の情報がないと保存できない' do
-        @item.shipping_charge_id = '' || '1'
+        @item.shipping_charge_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping charge can't be blank")
       end
       it '発送元の地域の情報がないと保存できない' do
-        @item.prefecture_id = '' || '1'
+        @item.prefecture_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it '発送までの日数の情報がないと保存できない' do
-        @item.days_for_shipping_id = '' || '1'
+        @item.days_for_shipping_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Days for shipping can't be blank")
       end
@@ -71,11 +71,6 @@ RSpec.describe Item, type: :model do
         @item.price = 'あああ'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
-      end
-      it 'userが紐づいていないと保存できない' do
-        @item.user = nil
-        @item.valid?
-        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
