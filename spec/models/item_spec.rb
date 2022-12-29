@@ -58,12 +58,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Shipping charge can't be blank")
       end
       it '発送元の地域の情報がないと保存できない' do
-        @item.prefecture_id = '' 
+        @item.prefecture_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it '発送元の地域の情報が---だと保存できない' do
-        @item.prefecture_id = '1' 
+        @item.prefecture_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
