@@ -21,11 +21,9 @@ class ItemsController < ApplicationController
   end
 
   def show
-    
   end
 
   def edit
-    
   end
 
   def update
@@ -36,7 +34,7 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
-  
+
   private
 
   def item_params
@@ -49,8 +47,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless current_user == @item.user
-      redirect_to root_path 
-    end
+    redirect_to root_path unless current_user == @item.user
   end
 end
