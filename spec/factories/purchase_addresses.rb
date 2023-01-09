@@ -5,7 +5,7 @@ FactoryBot.define do
     municipalities { Faker::Address.state }
     address        { Faker::Address.building_number }
     building_name  { Faker::Address.city_suffix }
-    phone_number   { "08011111111" } 
+    phone_number   { Faker::PhoneNumber.subscriber_number(length: 11) } 
     token          { "tok_abcdefghijk00000000000000000" }
   end
 end
