@@ -3,21 +3,17 @@ require 'rails_helper'
 RSpec.describe PurchaseAddress, type: :model do
   describe '寄付情報の保存' do
     before do
-      user = FactoryBot.build(:user)
-      item = FactoryBot.build(:item)
-      @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id, item_id: item.id)
+      user = FactoryBot.create(:user)
+      @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id)
     end
 
     context '内容に問題ない場合' do
       it 'すべての値が正しく入力されていれば保存できること' do
-        expect(@purchase_address)
+        expect(@purchase_address).to be_valid
       end
       it '建物名は空でも保存できること' do
         @purchase_address.building_name = ''
-        expect(@purchase_address)
-      end
-      it "tokenがあれば保存ができること" do
-        expect(@order)
+        expect(@purchase_address).to be_valid
       end
     end
 
@@ -58,9 +54,9 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
       end
       it "tokenが空では登録できないこと" do
-        @order.token = nil
-        @order.valid?
-        expect(@order.errors.full_messages).to include("Token can't be blank")
+        @purchase_address.token = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
