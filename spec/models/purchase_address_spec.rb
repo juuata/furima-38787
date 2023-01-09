@@ -16,6 +16,9 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.building_name = ''
         expect(@purchase_address)
       end
+      it "tokenがあれば保存ができること" do
+        expect(@order)
+      end
     end
 
     context '内容に問題がある場合' do
@@ -53,6 +56,11 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.phone_number = "123"
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
+      end
+      it "tokenが空では登録できないこと" do
+        @order.token = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
