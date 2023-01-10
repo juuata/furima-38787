@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
   before_action :set_item
   before_action :authenticate_user!
-  before_action :move_to_index 
+  before_action :move_to_index
   before_action :move_to_index_sold_out
 
   def index
@@ -22,7 +22,9 @@ class PurchasesController < ApplicationController
   private
 
   def purchase_params
-    params.require(:purchase_address).permit(:postal_code, :prefecture_id, :municipalities, :address, :building_name, :phone_number, :price).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:purchase_address).permit(:postal_code, :prefecture_id, :municipalities, :address, :building_name, :phone_number, :price).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def set_item
@@ -38,11 +40,11 @@ class PurchasesController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount: Item.find(params[:item_id]).price, 
-      card: purchase_params[:token],    
-      currency: 'jpy'                 
+      amount: Item.find(params[:item_id]).price,
+      card: purchase_params[:token],
+      currency: 'jpy'
     )
   end
 end

@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
   before_action :move_to_index, only: [:edit, :update, :destroy]
   before_action :move_to_index_sold_out, only: [:edit, :update, :destroy]
 
-
   def new
     @item = Item.new
   end
