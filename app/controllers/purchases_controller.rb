@@ -2,6 +2,7 @@ class PurchasesController < ApplicationController
   before_action :set_item
   before_action :authenticate_user!
   before_action :move_to_index 
+  before_action :move_to_index_sold_out
 
   def index
     @purchase_address = PurchaseAddress.new
@@ -30,6 +31,10 @@ class PurchasesController < ApplicationController
 
   def move_to_index
     redirect_to root_path if current_user == @item.user
+  end
+
+  def move_to_index_sold_out
+    redirect_to root_path if @item.purchase.presence
   end
 
   def pay_item
