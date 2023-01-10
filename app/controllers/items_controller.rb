@@ -2,6 +2,8 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit]
   before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :move_to_index_sold_out, only: [:edit, :update, :destroy]
+
 
   def new
     @item = Item.new
@@ -52,5 +54,9 @@ class ItemsController < ApplicationController
 
   def move_to_index
     redirect_to root_path unless current_user == @item.user
+  end
+
+  def move_to_index_sold_out
+    redirect_to root_path if @item.purchase.presence
   end
 end
