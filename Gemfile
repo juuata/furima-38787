@@ -62,6 +62,7 @@ end
 
 group :production do 
   gem 'unicorn', '5.4.1'
+  gem 'pg', '~> 1.4', '>= 1.4.5'
 end
 
 gem 'devise'
